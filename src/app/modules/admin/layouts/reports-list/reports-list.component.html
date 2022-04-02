@@ -1,0 +1,37 @@
+<div class="main-panel">
+    <div class="content">
+        <div class="container-fluid">
+            <h4 class="page-title">Reports</h4>
+            
+            <div class="col-lg-4 p-l-0 title-margin-left">
+                <div class="page-header">
+                    <div class="page-title">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a routerLink="">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Reports</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="container">
+                <div class="row">
+                    <ng-container *ngFor="let item of filterCategory | filter:searchKey:'title'">
+                        <div class="card col-md-3">
+                            <img src="{{item.image}}" alt="">
+                            <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.title}}</h5>
+                            <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.description}}</p>
+                            <p><strong>Price:</strong> ${{item.price}}</p>
+                            <button class="btn btn-primary" >Add to cart</button>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            
+
+
+        </div>
+    </div>
+   
+</div>

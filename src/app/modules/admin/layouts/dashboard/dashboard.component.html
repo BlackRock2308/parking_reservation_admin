@@ -1,0 +1,144 @@
+<div class="main-panel">
+    <div class="content">
+        <div class="container-fluid">
+            <h4 class="page-title">Dashboard</h4>
+            
+            <div class="col-lg-4 p-l-0 title-margin-left">
+                <div class="page-header">
+                    <div class="page-title">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a routerLink="">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Home</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <!--cards-->
+            <app-dash-cards></app-dash-cards>
+            <!--end-card-->
+
+            <table class="table align-middle mb-0 bg-white" *ngIf = "places">
+                <thead class="bg-light">
+                  <tr>
+                    <th>Full Name</th>
+                    <th>Matricule</th>
+                    <th>Status</th>
+                    <th>number place</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <!-- <tr>
+                        <td>
+                        <div class="d-flex align-items-center">
+                            <img
+                            src="../../../../../assets/img/parking2.png"
+                                alt=""
+                                style="width: 45px; height: 45px"
+                                class="rounded-circle"
+                                />
+                            <div class="ms-3">
+                            <p class="fw-bold mb-1">Ibrahima FAYE </p>
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <p class="fw-normal mb-1">DK 7658 D</p>
+                    
+                        </td>
+                        <td>
+                        <span class="badge badge-success rounded-pill d-inline">Occupy</span>
+                        </td>
+                        <td>86</td>
+                        <td>77 765 90 00</td>
+                        <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Edit
+                        </button>
+                        <button style="color: red;" type="button" class="btn btn-link btn-sm btn-rounded">
+                            Delete
+                        </button>
+                        </td>
+                  </tr> -->
+                  <tr *ngFor = "let place of places | paginate: { itemsPerPage: count, currentPage: p }" >
+                        <td>
+                        <div class="d-flex align-items-center">
+                            <img
+                            src="../../../../../assets/img/parking2.png"
+                                alt=""
+                                style="width: 45px; height: 45px"
+                                class="rounded-circle"
+                                />
+                            <div class="ms-3">
+                            <p class="fw-bold mb-1">{{ place.clientFullName }}</p>
+                            <!-- <p class="text-muted mb-0">john.doe@gmail.com</p> -->
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <p class="fw-normal mb-1">{{ place.matriculeCar }}</p>
+                        </td>
+                        <td>
+                            <span [ngClass]="place.status == 'Pending' ? 'badge-warning' : 'badge-success'" class="badge rounded-pill d-inline">{{ place.status }}</span>                        </td>
+                        <td>{{ place.parkingNumber }}</td>
+                        <td>{{ place.phoneNumber }}</td>
+                        <td>
+                        <button style="margin-right: 5px;" type="button" class="btn btn-link btn-sm btn-rounded">
+                            Edit
+                        </button>
+
+                        <button style="color: red;" type="button" class="btn btn-link btn-sm btn-rounded">
+                            Delete
+                        </button>
+                        </td>
+                  </tr>
+
+
+                  <!-- <tr>
+                    <td>
+                    <div class="d-flex align-items-center">
+                        <img
+                        src="../../../../../assets/img/parking2.png"
+                            alt=""
+                            style="width: 45px; height: 45px"
+                            class="rounded-circle"
+                            />
+                        <div class="ms-3">
+                        <p class="fw-bold mb-1">Soudou FAYE </p>
+                        </div>
+                    </div>
+                    </td>
+                    <td>
+                    <p class="fw-normal mb-1">DK 1005 SE</p>
+                
+                    </td>
+                    <td>
+                    <span class="badge badge-success rounded-pill d-inline">Occupy</span>
+                    </td>
+                    <td>78</td>
+                    <td>77 098 65 43</td>
+                    <td>
+                    <button type="button" class="btn btn-link btn-sm btn-rounded">
+                        Edit
+                    </button>
+                    <button style="color: red;" type="button" class="btn btn-link btn-sm btn-rounded">
+                        Delete
+                    </button>
+                    </td>
+              </tr> -->
+
+                  
+                </tbody>
+              </table>
+               <!--Including the pagination control.-->
+                <div class="text-center">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+              
+            
+           
+        </div>
+    </div>
+   
+</div>
