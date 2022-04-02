@@ -13,8 +13,16 @@ export class LandService {
 
   constructor(private http : HttpClient) { }
 
-  getParkingPlaces(): Observable<ParkingPlace[]> {
+  public getParkingPlaces(): Observable<ParkingPlace[]> {
     return this.http.get<any[]>(`${API_URL}/places`);
+  }
+
+  public updateParkingPlace(place: ParkingPlace): Observable<ParkingPlace> {
+    return this.http.put<ParkingPlace>(`${API_URL}/places/update`, place);
+  }
+
+  public deleteParkingPlace(parkingPlaceId: number): Observable<void> {
+    return this.http.delete<void>(`${API_URL}/places/${parkingPlaceId}`);
   }
 
 }

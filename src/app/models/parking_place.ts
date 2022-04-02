@@ -1,5 +1,5 @@
 export interface ParkingPlace {
-    id : Number,
+    id : number,
     clientFullName : String,
     matriculeCar : String,
     status : String,

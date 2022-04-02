@@ -19,6 +19,7 @@ import { ReportService } from './_services/report.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatTableModule} from '@angular/material/table'; 
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { FooterComponent } from './layouts/footer/footer.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -29,6 +30,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     ReportsListComponent,
     ReportDetailsComponent,
     FilterPipe,
+    FooterComponent,
     
     
   ],

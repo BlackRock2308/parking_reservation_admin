@@ -1,5 +1,5 @@
-<div class="main-panel">
-    <div class="content">
+<div class="main-panel container" id="main-container">
+    <div class="content " >
         <div class="container-fluid">
             <h4 class="page-title">Dashboard</h4>
             
@@ -16,6 +16,7 @@
             <!--cards-->
             <app-dash-cards></app-dash-cards>
             <!--end-card-->
+<!-- <div class="container" id="main-container"> -->
 
             <table class="table align-middle mb-0 bg-white" *ngIf = "places">
                 <thead class="bg-light">
@@ -29,38 +30,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                    <!-- <tr>
-                        <td>
-                        <div class="d-flex align-items-center">
-                            <img
-                            src="../../../../../assets/img/parking2.png"
-                                alt=""
-                                style="width: 45px; height: 45px"
-                                class="rounded-circle"
-                                />
-                            <div class="ms-3">
-                            <p class="fw-bold mb-1">Ibrahima FAYE </p>
-                            </div>
-                        </div>
-                        </td>
-                        <td>
-                        <p class="fw-normal mb-1">DK 7658 D</p>
-                    
-                        </td>
-                        <td>
-                        <span class="badge badge-success rounded-pill d-inline">Occupy</span>
-                        </td>
-                        <td>86</td>
-                        <td>77 765 90 00</td>
-                        <td>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded">
-                            Edit
-                        </button>
-                        <button style="color: red;" type="button" class="btn btn-link btn-sm btn-rounded">
-                            Delete
-                        </button>
-                        </td>
-                  </tr> -->
+                  
                   <tr *ngFor = "let place of places | paginate: { itemsPerPage: count, currentPage: p }" >
                         <td>
                         <div class="d-flex align-items-center">
@@ -84,59 +54,97 @@
                         <td>{{ place.parkingNumber }}</td>
                         <td>{{ place.phoneNumber }}</td>
                         <td>
-                        <button style="margin-right: 5px;" type="button" class="btn btn-link btn-sm btn-rounded">
+                        <button (click)="onOpenModal(place, 'edit')" style="margin-right: 5px;" type="button" class="btn btn-link btn-sm btn-rounded">
                             Edit
                         </button>
-
-                        <button style="color: red;" type="button" class="btn btn-link btn-sm btn-rounded">
+                        
+                        <button (click)="onOpenModal(place, 'delete')" style="color: red;" type="button" class="btn btn-link btn-sm btn-rounded">
                             Delete
                         </button>
                         </td>
                   </tr>
 
-
-                  <!-- <tr>
-                    <td>
-                    <div class="d-flex align-items-center">
-                        <img
-                        src="../../../../../assets/img/parking2.png"
-                            alt=""
-                            style="width: 45px; height: 45px"
-                            class="rounded-circle"
-                            />
-                        <div class="ms-3">
-                        <p class="fw-bold mb-1">Soudou FAYE </p>
-                        </div>
-                    </div>
-                    </td>
-                    <td>
-                    <p class="fw-normal mb-1">DK 1005 SE</p>
-                
-                    </td>
-                    <td>
-                    <span class="badge badge-success rounded-pill d-inline">Occupy</span>
-                    </td>
-                    <td>78</td>
-                    <td>77 098 65 43</td>
-                    <td>
-                    <button type="button" class="btn btn-link btn-sm btn-rounded">
-                        Edit
-                    </button>
-                    <button style="color: red;" type="button" class="btn btn-link btn-sm btn-rounded">
-                        Delete
-                    </button>
-                    </td>
-              </tr> -->
-
                   
                 </tbody>
+                <div class="mt-5">
+
+                </div>
               </table>
                <!--Including the pagination control.-->
                 <div class="text-center">
                     <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </div>
               
-            
+            <!-- Edit Modal -->
+            <div class="modal fade" id="updateEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeEditModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 style="font-weight: 1em; font-size: large;" class="modal-title" id="updateEmployeeModalLabel">Edit Parking Place {{editParkingPlace?.parkingNumber}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form #editForm="ngForm">
+                            <div class="form-group">
+                                <label for="name">Client Id</label>
+                                <input type="text" ngModel="{{editParkingPlace?.id}}" name="id" class="form-control" id="name" aria-describedby="emailHelp" placeholder="id">
+                                </div>
+                            <div class="form-group">
+                            <label for="name">Client full name</label>
+                            <input type="text" ngModel="{{editParkingPlace?.clientFullName}}" name="clientFullName" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Sokhna ...">
+                            </div>
+                           
+                            <div class="form-group">
+                            <label for="email">Car Matricule</label>
+                            <input type="email" ngModel="{{editParkingPlace?.matriculeCar}}" name="matriculeCar" class="form-control" id="email" placeholder="DK .... H">
+                            </div>
+                            <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="text" ngModel="{{editParkingPlace?.phoneNumber}}" name="phoneNumber" class="form-control" id="jobTitle" placeholder="77 000 00 00">
+                            </div>
+                            <div class="form-group">
+                            <label for="phone">Parking Slot Number</label>
+                            <input type="text" ngModel="{{editParkingPlace?.parkingNumber}}" name="parkingNumber" class="form-control" id="phone"  placeholder="number">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Status</label>
+                                <input type="text" ngModel="{{editParkingPlace?.status}}" name="status" class="form-control" id="phone"  placeholder="status">
+                                </div>
+    
+                            <div class="modal-footer">
+                            <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                            <button (click)="onUpdateParkingPlace(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                </div>
+
+            </div>
+
+            <!-- Delete Modal -->
+<div class="modal fade" id="deleteEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 style="font-weight: 1em; font-size: large;" class="modal-title" id="deleteModelLabel">Delete Parking Place Booking </h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <p style="font-weight: bold;">Are you sure you want to delete the reservation number  {{deleteParkingPlace?.id}}?</p>
+             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button (click)="onDeleteParkingPlace(deleteParkingPlace.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+             </div>
+          </div>
+       </div>
+    </div>
+  </div>
            
         </div>
     </div>
